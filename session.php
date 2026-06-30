@@ -10,7 +10,7 @@ $sql = mysqli_query($link,"select username from player where username = '$user_c
    $login_session = $row['username'];
    
    if(!isset($_SESSION['username'])){
-      header("location:login.php");
+      header("location:index.php");
       die();
    }
 

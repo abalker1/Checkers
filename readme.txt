@@ -2,7 +2,7 @@ Thank you for your interest in my project!
 To start, make sure to extract all the files, keep them the way they are!
 Styles are in a styles folder, and the images's are in the img folder for the background!
 The image for the king is with the rest of the files.
-login.php is the beginning of the website, use this to log in and access the rest of the site!
+index.php is the beginning of the website, use this to log in and access the rest of the site!
 welcome.php is the home page
 8by8 and 10by10.html are the game pages!
 In these pages, you can change the color of the pieces and the board itself!

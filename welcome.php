@@ -16,7 +16,7 @@
 			<a href = "Leaderboard.html" style = "text-decoration:none; color:white"><button type = "button"  class="navBarButtons">Leaderboard</button></a>
 			<a href = "help.html" style = "text-decoration:none; color:white"><button type = "button"  class="navBarButtons">Help</button></a>
 			<a href = "contactUs.html" style = "text-decoration:none; color:white"><button type = "button"  class="navBarButtons">Contact Us</button></a>
-			<a href = "login.php" style = "text-decoration:none; color:white"><button type = "button"  class="navBarButtons">Sign Out</button></a>
+			<a href = "index.php" style = "text-decoration:none; color:white"><button type = "button"  class="navBarButtons">Sign Out</button></a>
 		</div>
       <h1>Welcome <?php echo $login_session; ?>!</h1> 
 	  <h3>This website was built by Amanda Balker, as part of a CSCI 130 project at Fresno State.</h3>
