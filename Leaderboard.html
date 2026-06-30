@@ -1,0 +1,98 @@
+<?php
+include('session.php');
+require_once 'configSQL.php';
+$username = $login_session;
+echo $username;
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/Leaderboard.css">
+    <title>Leaderboard</title>
+</head>
+<body>
+	<div id = "navBar">
+			<a href = "welcome.php" style = "text-decoration:none; color:white"><button type = "button"  class="navBarButtons">Home</button></a>
+			<a href = "8by8.html" style = "text-decoration:none; color:white"><button type = "button"  class="navBarButtons">Play 8x8</button></a>
+			<a href = "10by10.html" style = "text-decoration:none; color:white"><button type = "button"  class="navBarButtons">Play 10x10</button></a>
+			<a href = "Leaderboard.html" style = "text-decoration:none; color:white"><button type = "button"  class="navBarButtons">Leaderboard</button></a>
+			<a href = "help.html" style = "text-decoration:none; color:white"><button type = "button"  class="navBarButtons">Help</button></a>
+			<a href = "contactUs.html" style = "text-decoration:none; color:white"><button type = "button"  class="navBarButtons">Contact Us</button></a>
+			<a href = "login.php" style = "text-decoration:none; color:white"><button type = "button"  class="navBarButtons">Sign Out</button></a>
+		</div>
+    <h1>Leaderboard</h1>
+
+    <table id="allLeaderboard">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Score</th>
+                <th>Duration</th>
+                <th>White Turns</th>
+                <th>Black Turns</th>
+            </tr>
+        </thead>
+        <tbody id="allLeaderboardBody"></tbody>
+    </table>
+
+   
+
+<!-- Add this script block after your existing script block -->
+<script>
+    let myData = [];
+    let personalData = [];
+
+    var httpRequestAllGames = new XMLHttpRequest();
+    httpRequestAllGames.onreadystatechange = function () {
+        if (httpRequestAllGames.readyState == 4 && httpRequestAllGames.status == 200) {
+            myData = JSON.parse(httpRequestAllGames.responseText);
+            sortDataByDuration(); // Sort the data by duration before populating the table
+            populateLeaderboardTables();
+        }
+    };
+    httpRequestAllGames.open('GET', 'getGame.php');
+    httpRequestAllGames.send();
+
+    function formatDuration(totalSeconds) {
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        const formattedDuration = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        return formattedDuration;
+    }
+
+    function sortDataByDuration() {
+        myData.sort((a, b) => a[2] - b[2]); // Sort by the third element (duration)
+    }
+
+    function populateLeaderboardTables() {
+        const allLeaderboardBody = document.getElementById('allLeaderboardBody');
+
+        // Clear existing rows
+        allLeaderboardBody.innerHTML = '';
+
+        // Populate all leaderboard table
+        myData.forEach(data => {
+            let score;
+            let duration;
+            const row = document.createElement('tr');
+            if (data[1] == 1) {
+                score = "Player 1 Won!"
+            } else {
+                score = "Player 2 Won!";
+            }
+            let fullTime = data[2];
+            duration = formatDuration(fullTime);
+            row.innerHTML = `<td>${data[0]}</td>
+                             <td>${score}</td>
+                             <td>${duration}</td>
+                             <td>${data[3]}</td>
+                             <td>${data[4]}</td>`;
+            allLeaderboardBody.appendChild(row);
+        });
+    }
+</script>
+
+</body>
+</html>
