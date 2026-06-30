@@ -12,7 +12,7 @@ if ($link->query($sql) === TRUE) {
 $link->close();
 
 // Open a new connection to the created database
-$link = new mysqli($servername, $userName, $passWord, $dbname);
+$link = new mysqli($servername, $userName, $passWord, $dbname, $port);
 if ($link->connect_error) {
     die("Connection failed: " . $link->connect_error . "<br>");
 }
@@ -36,7 +36,7 @@ if ($link->query($sql) === TRUE) {
 $link->close();
 
 
-$link = new mysqli($servername, $userName, $passWord, $dbname);
+$link = new mysqli($servername, $userName, $passWord, $dbname, $port);
 if ($link->connect_error) {
     die("Connection failed: " . $link->connect_error . "<br>");
 }
